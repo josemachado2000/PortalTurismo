@@ -1,0 +1,20 @@
+.loginPage {
+  position: absolute;
+  top: 25%;
+  left: 33%;
+}
+.loginForm {
+  width: 500px;
+  height: 380px;
+  border: 2px white;
+  border-radius: 20px;
+  background-color: white;
+  padding: 20px;
+}
+.form-group.required .requiredLabel:after {
+  content: "*";
+  color: red;
+}
+p {
+  margin-bottom: 5px;
+}

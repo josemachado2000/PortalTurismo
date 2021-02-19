@@ -1,0 +1,24 @@
+.signUpPage {
+  position: absolute;
+  width: 97.5%;
+  height: 90%;
+}
+.signUpForm {
+  height: 85vh;
+  border: 2px white;
+  border-radius: 20px;
+  background-color: white;
+  padding: 20px;
+}
+.form-group.required .requiredLabel:after {
+  content: "*";
+  color: red;
+}
+.signUpOptionPage {
+  display: flex;
+  padding: 20px;
+}
+.col.card {
+  margin: 15px;
+  border-radius: 20px;
+}

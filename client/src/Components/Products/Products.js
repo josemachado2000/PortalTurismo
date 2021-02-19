@@ -1,0 +1,106 @@
+// TODO IMPORTS -------------------------------------------------------------------------------- //
+import React, { useState } from "react";
+import { useAxiosGet } from "../../Hooks/HttpRequests";
+import { connect } from "react-redux";
+import { addBasket } from "../../Actions/basketActions";
+
+import { Card, Button } from "react-bootstrap";
+import { MDBCol, MDBIcon } from "mdbreact";
+import "../../Components/Products/Products.css";
+import { Rating } from "@material-ui/lab";
+
+// TODO  --------------------------------------------------------------------------------------- //
+const Products = (props) => {
+  const url = `http://localhost:5000/produtos`;
+  var products = useAxiosGet(url);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  var content = null;
+  if (products.data) {
+    const results = products.data.filter((prod) =>
+      prod.nome.toLowerCase().includes(searchTerm)
+    );
+    content = results.map((product) => (
+      <div key={product.idProduto}>
+        <Card style={{ borderRadius: "10px" }}>
+          <Card.Img
+            style={{
+              borderTopLeftRadius: "10px",
+              borderTopRightRadius: "10px",
+            }}
+            variant="top"
+            src={require(`../../assets/images/${product.imagem}`).default}
+            alt=""
+          />
+          <Card.Body>
+            <Card.Title style={{ height: "50px" }}>{product.nome}</Card.Title>
+            <Card.Text style={{ height: "60px" }}>
+              {product.descricao}
+            </Card.Text>
+            <Card.Text style={{ height: "30px" }}>{product.preco}€</Card.Text>
+            <Rating
+              style={{ height: "30px" }}
+              name="size-medium"
+              defaultValue={3}
+              // onChange={() => rating()}
+            />
+            <Button
+              style={{
+                position: "absolute",
+                bottom: "0",
+                right: "0",
+                marginBottom: "0px",
+                width: "100%",
+                height: "30px",
+                padding: "5px",
+                borderBottomLeftRadius: "10px",
+                borderBottomRightRadius: "10px",
+              }}
+              variant="dark"
+              size="sm"
+              onClick={() => props.addBasket(product)}
+            >
+              Adicionar ao Carrinho
+            </Button>
+          </Card.Body>
+        </Card>
+      </div>
+    ));
+  }
+
+  return (
+    <div style={{ margin: "20px", padding: "20px", borderRadius: "20px" }}>
+      <h3>Produtos</h3>
+      <MDBCol md="6">
+        <div
+          className="input-group md-form form-sm form-1 pl-0"
+          style={{ width: "514px" }}
+        >
+          <div className="input-group-prepend">
+            <span
+              className="input-group-text purple lighten-3"
+              id="basic-text1"
+            >
+              <MDBIcon className="text-white" icon="search" />
+            </span>
+          </div>
+          <input
+            className="form-control my-0 py-1"
+            type="text"
+            placeholder="Pesquisar produto"
+            value={searchTerm}
+            onChange={handleChange}
+            aria-label="Search"
+          />
+        </div>
+      </MDBCol>
+      <div className="productsList">{content}</div>
+    </div>
+  );
+};
+
+export default connect(null, { addBasket })(Products);

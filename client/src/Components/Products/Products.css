@@ -1,0 +1,43 @@
+/* ANONYMOUS HOME */
+.productsListPage {
+  padding: 20px;
+}
+.productsList {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+/* PRODUCT */
+.productPage {
+  position: absolute;
+  padding: 20px;
+}
+.card {
+  width: 250px;
+  height: 500px;
+  margin: 5px;
+  background-color: rgb(245, 245, 245);
+  border: none;
+}
+.card-img,
+.card-img-bottom,
+.card-img-top {
+  width: 250px;
+  height: 250px;
+}
+.btn {
+  position: absolute;
+  bottom: 0;
+  margin: 0px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.col-md-6 {
+  padding-left: 0px;
+}
+.md-form {
+  background-color: white;
+}
+.purple.lighten-3 {
+  background-color: rgb(82, 82, 82) !important;
+}
